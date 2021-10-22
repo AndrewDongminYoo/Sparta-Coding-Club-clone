@@ -7,6 +7,7 @@ client = MongoClient('localhost', port=27017)
 db = client.get_database('Lecture')
 if application.env == 'development':
     os.popen('mongod')
+    application.debug = True
 
 
 @application.route('/')
