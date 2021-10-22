@@ -3,18 +3,24 @@
     box-sizing: border-box;
 }
 
-.html {
+html {
     font-size: 14px;
     font-weight: 600;
 
+}
+
+body {
+    width: 100%;
+    padding-bottom: 100px;
+    background-color: #f1f3f5;
 }
 
 .sparta-red {
     background-color: #E8344E;
 }
 
-.sparta-red .button {
-    font-family: "GmarketSans" sans-serif;
+.sparta-red .tag {
+    font-family: "GmarketSans", "Noto Sans KR",  sans-serif;
     font-size: 12px;
     font-weight: 700;
     color: #fff;
@@ -24,8 +30,38 @@
     margin-right: 8px;
 }
 
+.sparta-red.button {
+    cursor: pointer;
+    border-radius: 3px;
+    background-color: #e8344e;
+    width: 100%;
+    padding: 14px 0;
+    font-family: "Spoqa Han Sans Neo","sans-serif";
+    font-size: 18px;
+    font-weight: 700;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-align: center;
+    color: #fff;
+    margin-bottom: 8px;
+}
+
+.discount {
+    font-family: "Spoqa Han Sans Neo","sans-serif";
+    font-size: 18px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: -.9px;
+    text-align: left;
+    color: #e8344e;
+}
+
 .heading {
-    font-family: "GmarketSans" sans-serif;
+    font-family: "GmarketSans", "Noto Sans KR",  sans-serif;
     font-size: 28px;
     font-weight: 700;
     font-stretch: normal;
@@ -40,7 +76,7 @@
     margin-bottom: 8px;
 }
 
-.enrolment {
+.classroom {
     width: 100%;
     margin: auto;
     padding: 16px;
@@ -48,7 +84,7 @@
     background-color: #fff !important;
 }
 
-.enrolment .title {
+.classroom .title {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -56,17 +92,27 @@
     margin-top: 23px;
 }
 
-.enrolment .description {
-
+.classroom .description {
+    font-family: "Spoqa Han Sans Neo","sans-serif";
+    font-size: 14px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.6;
+    letter-spacing: -.84px;
+    text-align: left;
+    color: #000;
+    display: flex;
+    align-items: center;
 }
 
-.enrolment .toggle {
+.classroom .toggle {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.enrolment .classes {
+.classroom .classes {
     border: 2px solid #fff;
     display: flex;
     align-items: center;
@@ -79,7 +125,7 @@
     margin-top: 5px;
 }
 
-.enrolment .time {
+.classroom .time {
     width: 45px;
     font-family: "Spoqa Han Sans Neo","sans-serif";
     font-size: 16px;
@@ -92,7 +138,83 @@
 }
 
 @media (min-width: 100px) and (max-width: 757px) {
-    .enrolment .title {
+    .classroom .title {
         width: 100%;
     }
+}
+
+.enrolment {
+    position: sticky;
+    top: 150px;
+    min-width: 393px;
+    padding: 30px 27px 28px 29px;
+    border-radius: 5px;
+    border: .6px solid #dee2e6;
+    background-color: #fff;
+}
+
+.class-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: contain;
+    transition: opacity .25s;
+}
+
+.side-bar {
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    background-color: #e9ecef;
+    display: flex;
+    position: relative;
+    box-shadow: 2px 4px 8px 0 rgb(0 0 0 / 5%);
+}
+
+.nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 520px;
+    height: 48px;
+    flex-grow: 0;
+    border-radius: 24px;
+    border: 1px solid #adb5bd;
+    background-color: #fff;
+    cursor: pointer;
+    position: relative;
+}
+
+.nav-bar .title-text {
+    font-family: "Spoqa Han Sans Neo","sans-serif";
+    font-size: 18px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: -1.08px;
+    text-align: center;
+    color: #000;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-top: 3px;
+    max-width: 300px;
+}
+
+.nav-bar .title-button {
+    right: 3px;
+    position: absolute;
+    width: 42px;
+    height: 42px;
+    border-radius: 100px;
+    background-color: #f1f1f1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
