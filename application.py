@@ -1,19 +1,18 @@
 from flask import Flask, render_template, request, jsonify
 from pymongo import MongoClient
 import os
-import uuid
 
 application = Flask(__name__, static_folder='static', template_folder='templates')
-client = MongoClient('localhost', port=27017)
-db = client.get_database('Lecture')
 if application.env == 'development':
     os.popen('mongod')
     application.debug = True
+client = MongoClient('localhost', port=27017)
+db = client.get_database('Lecture')
+classes = db.get_collection('lectures')
 
 
 @application.route('/')
-def hello_world():  # put application's code here
-
+def hello_world():
     return 'Hello World!'
 
 
@@ -30,6 +29,12 @@ def show_video():
 @application.route('/roadmap')
 def show_roadmap():
     return render_template('RoadmapPage.html')
+
+
+@application.route('/api/class', methods=['GET'])
+def show_class():
+
+    classes.find({})
 
 
 if __name__ == '__main__':

@@ -2,6 +2,7 @@ from pymongo import MongoClient
 import os
 import csv
 from uuid import uuid4
+from bson import ObjectId
 
 client = MongoClient('localhost', port=27017)
 db = client.get_database('Lecture')

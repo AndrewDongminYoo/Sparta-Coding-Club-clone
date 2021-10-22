@@ -1,2 +1,6 @@
-/venv/
+# python
+*.pyo
+*.pyc
 /.idea/
+/venv/
+/__pycache__/
