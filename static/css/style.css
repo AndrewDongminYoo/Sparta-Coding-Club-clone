@@ -13,6 +13,33 @@
     background-color: #E8344E;
 }
 
+.sparta-red .button {
+    font-family: "GmarketSans" sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    padding: 6px 10px;
+    background-color: #E8344E;
+    border-radius: 100px;
+    margin-right: 8px;
+}
+
+.heading {
+    font-family: "GmarketSans" sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 8px;
+}
+
 .enrolment {
     width: 100%;
     margin: auto;
@@ -50,6 +77,18 @@
     margin-bottom: 5px;
     cursor: pointer;
     margin-top: 5px;
+}
+
+.enrolment .time {
+    width: 45px;
+    font-family: "Spoqa Han Sans Neo","sans-serif";
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: -.48px;
+    text-align: left;
 }
 
 @media (min-width: 100px) and (max-width: 757px) {
