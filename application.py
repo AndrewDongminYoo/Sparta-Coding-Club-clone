@@ -37,7 +37,7 @@ def show_roadmap():
 
 
 @application.route('/api/courses', methods=['GET', 'POST'])
-def show_class():
+def show_courses():
     if request.method == 'GET':
         pass
     elif request.method == "POST":
@@ -45,7 +45,7 @@ def show_class():
 
 
 @application.route('/api/enrolment', methods=['GET', 'POST'])
-def show_class():
+def post_enrolment():
     if request.method == 'GET':
         pass
     elif request.method == "POST":
@@ -53,7 +53,7 @@ def show_class():
 
 
 @application.route('/api/lecture', methods=['GET', 'POST'])
-def show_class():
+def show_lecture():
     if request.method == 'GET':
         pass
     elif request.method == "POST":

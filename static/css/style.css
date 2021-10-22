@@ -12,18 +12,26 @@ body, .root {
     height: 100vh;
     margin: 0;
     background-color: #e9ecef;
+    display: flex;
+    place-items: center;
+    justify-content: center;
 }
 
 .wrapper {
     margin: 0;
     padding: 0;
+    place-self: flex-start;
 }
 
-.sparta-red {
+.sparta-red-bg {
     background-color: #E8344E;
 }
 
-.sparta-red .tag {
+.sparta-red-color {
+    color: #e8344e;
+}
+
+.sparta-red-bg .tag {
     font-family: "GmarketSans", "Noto Sans KR", sans-serif;
     font-size: 12px;
     font-weight: 700;
@@ -34,7 +42,7 @@ body, .root {
     margin-right: 8px;
 }
 
-.sparta-red.button {
+.sparta-red-bg.button {
     cursor: pointer;
     border-radius: 3px;
     background-color: #e8344e;
@@ -148,13 +156,107 @@ body, .root {
 }
 
 .enrolment {
+    width: 0;
     position: sticky;
     top: 150px;
     min-width: 393px;
     padding: 30px 27px 28px 29px;
+    margin: 8px 0 0;
     border-radius: 5px;
     border: .6px solid #dee2e6;
     background-color: #fff;
+}
+
+.enrolment .enrol-header,
+.enrolment .enrol-head,
+.payment-installment {
+    font-family: "Spoqa Han Sans Neo","sans-serif";
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0 22px;
+    font-weight: 700;
+    font-stretch: normal;
+    font-style: normal;
+    text-align: left;
+    color: #212529;
+}
+
+.enrol-head h2 {
+    font-size: 20px;
+    line-height: 1;
+    letter-spacing: -.6px;
+}
+
+.payment .payment-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+
+.payment-info-left,
+.payment-info-right {
+    font-family: "Spoqa Han Sans Neo","sans-serif";
+    font-size: 14px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: -.7px;
+    text-align: left;
+    color: #868e96;
+}
+
+.payment-divider {
+    width: 100%;
+    height: 1px;
+    margin-bottom: 20px;
+}
+
+.installment {
+    font-family: "Spoqa Han Sans Neo","sans-serif";
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: -.8px;
+    text-align: left;
+    color: #212529;
+}
+
+.installment-right {
+    display: flex;
+    align-items: flex-end;
+}
+
+.installment-discount {
+    font-family: "Spoqa Han Sans Neo","sans-serif";
+    font-size: 18px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: -.9px;
+    text-align: left;
+}
+
+.installment-price {
+    font-family: "Spoqa Han Sans Neo","sans-serif";
+    margin-left: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: -.75px;
+}
+
+.installment-agreement {
+    text-align: center;
+    color: #868e96;
+    font-size: 13px;
 }
 
 .class-player {

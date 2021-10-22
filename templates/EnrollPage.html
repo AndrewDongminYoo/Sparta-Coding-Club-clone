@@ -10,7 +10,44 @@
 <body>
 {% block body %}
 <div class="root">
-<div class="enrolment"><div class="sparta-red button">수강신청하기</div></div>
+    <section class="enrolment">
+        <div class="enrol-header">
+            <div class="enrol-head"><h2>수강신청하기</h2></div>
+            <div class="enrol-head" style="color: #868e96;"><h2>웹개발종합반</h2></div>
+        </div>
+        <div class="payment">
+            <div class="payment-info">
+                <div class="payment-info-left">총 상품 금액</div>
+                <div class="payment-info-right">800,000 원</div>
+            </div>
+            <div class="payment-info">
+                <div class="payment-info-left sparta-red-color">얼리버드 할인 금액</div>
+                <div class="payment-info-right">-&nbsp;&nbsp;&nbsp;230,000 원
+                </div>
+            </div>
+            <div class="payment-info">
+                <div class="payment-info-left">결제 가격</div>
+                <div class="payment-info-right">570,000 원</div>
+            </div>
+        </div>
+        <div class="payment-divider"></div>
+        <div class="payment-installment">
+            <div class=installment>6개월 할부</div>
+            <div class="installment-right">
+                <div class="installment-discount sparta-red-color">29%</div>
+                <div class="">월&nbsp;&nbsp;<span>95,000</span>원</div>
+            </div>
+        </div>
+        <div class="">
+            <div class="">완주 시 5만 포인트 추가 환급</div>
+        </div>
+        <div class="sparta-red-bg button" onclick="enrolment()">수강신청하기</div>
+        <div class="">
+            <a href="https://www.notion.so/spartacodingclub/cb0c63c1145f4b60aacf0692a888e6fd">개인정보수집</a>,
+            <a href="https://www.nicepay.co.kr/cs/terms/policy1.do">전자금융거래 기본약관</a>,<br>
+            <a href="https://www.nicepay.co.kr/cs/terms/private.do">개인정보처리방침</a>에 동의합니다.
+        </div>
+    </section>
 </div>
 {% endblock %}
 </body>
