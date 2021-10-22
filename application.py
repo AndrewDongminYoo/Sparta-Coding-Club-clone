@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 from pymongo import MongoClient
 import os
+import uuid
 
 application = Flask(__name__, static_folder='static', template_folder='templates')
 client = MongoClient('localhost', port=27017)
@@ -12,6 +13,7 @@ if application.env == 'development':
 
 @application.route('/')
 def hello_world():  # put application's code here
+
     return 'Hello World!'
 
 
