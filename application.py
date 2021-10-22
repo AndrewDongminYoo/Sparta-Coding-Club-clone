@@ -1,6 +1,8 @@
+import jwt
 from flask import Flask, render_template, request, jsonify
 from pymongo import MongoClient
 import os
+import json
 
 application = Flask(__name__, static_folder='static', template_folder='templates')
 if application.env == 'development':
@@ -9,6 +11,9 @@ if application.env == 'development':
 client = MongoClient('localhost', port=27017)
 db = client.get_database('Lecture')
 classes = db.get_collection('lectures')
+config_file = open("./config.json", mode="r")
+config_json = json.load(config_file)
+SECRET_KEY = config_json["SECRET_KEY"]
 
 
 @application.route('/')
@@ -31,10 +36,28 @@ def show_roadmap():
     return render_template('RoadmapPage.html')
 
 
-@application.route('/api/class', methods=['GET'])
+@application.route('/api/courses', methods=['GET', 'POST'])
 def show_class():
+    if request.method == 'GET':
+        pass
+    elif request.method == "POST":
+        pass
 
-    classes.find({})
+
+@application.route('/api/enrolment', methods=['GET', 'POST'])
+def show_class():
+    if request.method == 'GET':
+        pass
+    elif request.method == "POST":
+        pass
+
+
+@application.route('/api/lecture', methods=['GET', 'POST'])
+def show_class():
+    if request.method == 'GET':
+        pass
+    elif request.method == "POST":
+        pass
 
 
 if __name__ == '__main__':
