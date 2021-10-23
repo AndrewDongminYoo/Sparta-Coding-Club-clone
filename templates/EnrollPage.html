@@ -8,19 +8,21 @@
         <script>
             let courseName = "{{ course_name }}"
             window.onload = () => {
-                fetch("/api/enrollment")
+                fetch(`/api/enrollment?title=${courseName}`)
+                .then((resp)=>resp.json())
                 .then((response)=>{
-                    let { price, discount_rate } = response
+                    let { price, discount_ratio } = response
                     let originPrice = price
-                    let discounting = price * discount_rate
+                    let discounting = price * discount_ratio
                     let discounted = price - discounting
-                    let installment = Math.trunc(discounted/6)
+                    let installment = discounted/6
+                    console.log(price, discount_ratio)
                     let [first, second, third] = document.querySelectorAll("div.payment-info-right")
-                    first.textContent = originPrice.toLocaleString()+" 원"
-                    second.textContent = discounting.toLocaleString()+"-&nbsp;&nbsp;&nbsp; 원"
-                    third.textContent = discounted.toLocaleString()+" 원"
-                    document.querySelector(".installment-discount").textContent = discount_rate.toString()+"% "
-                    document.querySelector(".installment-price span").textContent = installment.toLocaleString()
+                    first.textContent = originPrice.toLocaleString("ko")+" 원"
+                    second.textContent = discounting.toLocaleString("ko")+" 원"
+                    third.textContent = discounted.toLocaleString("ko")+" 원"
+                    document.querySelector(".installment-discount").textContent = (discount_ratio*100).toFixed()+"% "
+                    document.querySelector(".installment-price span").textContent = installment.toLocaleString("ko", {maximumFractionDigits:0})
 
                 })
             }

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 import datetime
-from flask import Flask, render_template, request, jsonify, make_response, abort, redirect
+from flask import Flask, render_template, request, make_response, abort, redirect, jsonify
 from pymongo import MongoClient
-# from flask_login import current_user, login_user, logout_user
-from flask_login import LoginManager
+from apps import apis
+from flask_login import current_user, login_user, logout_user, LoginManager
 from apps.models import User
 from uuid import uuid4
 import os
@@ -12,6 +12,7 @@ from flask_mongoengine import MongoEngine
 
 
 application = Flask(__name__, static_folder='static', template_folder='templates')
+application.register_blueprint(apis.bp)
 application.config['MONGODB_SETTINGS'] = {
     "db": "Lecture",
     "port": 27017,
@@ -26,6 +27,7 @@ client = MongoClient('localhost', port=27017)
 db = client.get_database('Lecture')
 lectures = db.get_collection('lectures')
 users = db.get_collection("users")
+courses = db.get_collection("courses")
 config_file = open("./config.json", mode="r")
 config_json = json.load(config_file)
 SECRET_KEY = config_json["SECRET_KEY"]
@@ -42,11 +44,11 @@ def hello_world():
 @application.route('/enrollment')
 def enrollment():
     # 보안을 신경 쓰면서 쿠키를 주고받을 수 있도록 make_response 사용
-    response = make_response(render_template('EnrollPage.html'))
+    response = make_response(render_template('EnrollPage.html', course_name="웹개발 종합반"))
     if not request.cookies.get("username"):
         _id = uuid4().__str__()
         username = "test"
-        password = "qwertyisweekpw"
+        password = "qwerty-is-week-pw"
         created_at = datetime.datetime.utcnow()
         done = []
         seen = []
@@ -73,7 +75,6 @@ def enrollment():
 def show_video():
     if not request.cookies.get("username"):
         return abort(401)
-
     return render_template('LecturePage.html')
 
 
