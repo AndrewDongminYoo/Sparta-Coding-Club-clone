@@ -9,9 +9,9 @@ html {
 }
 
 body, .root {
-    height: 100vh;
-    margin: 0;
-    background-color: #e9ecef;
+    /*height: 100vh;*/
+    /*margin: 0;*/
+    background-color: #f1f3f5;
     display: flex;
     place-items: center;
     justify-content: center;
@@ -21,6 +21,8 @@ body, .root {
     margin: 0;
     padding: 0;
     place-self: flex-start;
+    width: 100%;
+    height: 100%;
 }
 
 .sparta-red-bg {
@@ -86,6 +88,378 @@ body, .root {
     justify-content: space-between;
     align-items: flex-end;
     margin-bottom: 8px;
+}
+
+.navigation-bar {
+    max-width: 1230px;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.roadmap-bg {
+    width: 100%;
+    padding-bottom: 100px;
+    background-color: #f1f3f5;
+}
+
+.roadmap {
+    width: 100%;
+    max-width: 1133px;
+    padding-bottom: 100px;
+    background-color: #f1f3f5;
+}
+
+.roadmap-content {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content-main {
+    width: 830px;
+}
+
+.round-week {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+
+.lectures {
+    width: 100%;
+    padding: 16px 42px;
+    margin: auto;
+    border-radius: 24px;
+    background-color: #fff !important;
+}
+
+.roadmap-header {
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 23px;
+}
+
+.summary-title {
+    margin: 0 0 16px .3px;
+    font-family: "Spoqa Han Sans Neo", "sans-serif";
+    font-size: 24px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: -.72px;
+    text-align: left;
+    color: #000;
+    padding: 4px 0;
+    width: 400px;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: flex;
+}
+
+.summary-header {
+    font-family: "GmarketSans", "sans-serif";
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    padding: 6px 10px;
+    background-color: #e8344e;
+    border-radius: 100px;
+    margin-right: 8px;
+}
+
+.summary-detail {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 360px;
+}
+
+.detail-obj {
+    font-family: "Spoqa Han Sans Neo", "sans-serif";
+    font-size: 14px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.6;
+    letter-spacing: -.84px;
+    text-align: left;
+    color: #000;
+    display: flex;
+    align-items: center;
+}
+
+.colleague {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    /*padding: 15px 36px;*/
+    border-radius: 100px;
+    background-color: #f1f3f5;
+    position: relative;
+}
+
+.colleague-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 15px 36px;
+    border-radius: 100px;
+    background-color: #f1f3f5;
+    position: relative;
+}
+
+.colleague-profiles {
+    position: absolute;
+    top: -18px;
+    right: 0;
+    background-color: #fff;
+    border-radius: 100px;
+}
+
+.colleague-profiles img {
+    margin-left: -5px;
+    width: 32px;
+    height: 32px;
+    vertical-align: middle;
+    border-style: none;
+}
+
+.colleague-num {
+    margin: 0 6px 0 0;
+    font-size: 28px;
+    line-height: 1;
+    letter-spacing: -1.68px;
+    text-align: center;
+    font-family: "Spoqa Han Sans Neo", "sans-serif";
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    color: #000;
+    display: inline;
+}
+
+.colleague-profiles {
+    margin: 0 6px 0 0;
+    font-size: 28px;
+    line-height: 1;
+    letter-spacing: -1.68px;
+    text-align: center;
+}
+
+.dotted-hr {
+    width: 100%;
+    height: 2px;
+    background-image: linear-gradient(
+            90deg, #000 50%, hsla(0, 0%, 100%, 0) 0);
+    background-size: 10px 2px;
+    background-repeat: repeat-x;
+    margin: 22px auto 25px;
+}
+
+.week-detail-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.detail-header-title {
+    font-family: "Spoqa Han Sans Neo", "sans-serif";
+    font-size: 18px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: -.54px;
+    text-align: left;
+    color: #000;
+}
+
+.detail-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 24px;
+    border-radius: 100px;
+    background-color: #f1f3f5;
+    cursor: pointer;
+}
+
+.detail-toggle {
+    font-family: "Spoqa Han Sans Neo", "sans-serif";
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: -.48px;
+    color: #000;
+}
+
+.week-body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13.9px 30.5px;
+    border-radius: 30px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.week-body.highlighted {
+    box-shadow: 0 4px 12px 0 rgb(0 0 0 / 8%);
+    border: 2px solid #e8344e !important;
+    background-color: #fff5f5 !important;
+    color: #000 !important;
+}
+
+.week-detail-num {
+    font-family: "Spoqa Han Sans Neo", "sans-serif";
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: -.48px;
+    text-align: left;
+    width: 40px;
+    margin-right: 0;
+}
+
+.week-detail-title {
+    width: 400px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-top: 3px;
+    font-family: "Spoqa Han Sans Neo", "sans-serif";
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: -.48px;
+    text-align: left;
+}
+
+.week-detail-playtime {
+    width: 45px;
+    font-family: "Spoqa Han Sans Neo", "sans-serif";
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: -.48px;
+    text-align: left;
+}
+
+.week-detail-seen {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+}
+
+.week-homework {
+    cursor: pointer;
+    margin-top: 8px;
+    border-radius: 24px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 16px 42px;
+}
+
+.week-homework-title {
+    width: 650px;
+    font-family: "Spoqa Han Sans Neo", "sans-serif";
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: -.48px;
+    text-align: left;
+    color: #000;
+    padding-top: 3px;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.week-homework-status {
+    font-family: "Spoqa Han Sans Neo", "sans-serif";
+    font-size: 15px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: -.45px;
+    text-align: center;
+    padding: 10px 15px;
+    border-radius: 20px;
+    background-color: #e9ecef;
+    color: #000;
+}
+
+.wil {
+    margin-bottom: 16px;
+}
+
+.round-wil {
+    padding: 16px 42px;
+    cursor: pointer;
+    margin-top: 8px;
+    border-radius: 24px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.round-wil-title {
+    width: 650px;
+    font-family: "Spoqa Han Sans Neo", "sans-serif";
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: -.48px;
+    text-align: left;
+    color: #000;
+    padding-top: 3px;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.round-wil-status {
+    font-family: "Spoqa Han Sans Neo", "sans-serif";
+    font-size: 15px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: -.45px;
+    text-align: center;
+    padding: 10px 15px;
+    border-radius: 20px;
+    background-color: #e9ecef;
+    color: #000;
 }
 
 .classroom {
@@ -170,7 +544,7 @@ body, .root {
 .enrolment .enrol-header,
 .enrolment .enrol-head,
 .payment-installment {
-    font-family: "Spoqa Han Sans Neo","sans-serif";
+    font-family: "Spoqa Han Sans Neo", "sans-serif";
     align-items: center;
     display: flex;
     justify-content: space-between;
@@ -198,7 +572,7 @@ body, .root {
 
 .payment-info-left,
 .payment-info-right {
-    font-family: "Spoqa Han Sans Neo","sans-serif";
+    font-family: "Spoqa Han Sans Neo", "sans-serif";
     font-size: 14px;
     font-weight: 500;
     font-stretch: normal;
@@ -216,7 +590,7 @@ body, .root {
 }
 
 .installment {
-    font-family: "Spoqa Han Sans Neo","sans-serif";
+    font-family: "Spoqa Han Sans Neo", "sans-serif";
     font-size: 16px;
     font-weight: 500;
     font-stretch: normal;
@@ -233,7 +607,7 @@ body, .root {
 }
 
 .installment-discount {
-    font-family: "Spoqa Han Sans Neo","sans-serif";
+    font-family: "Spoqa Han Sans Neo", "sans-serif";
     font-size: 18px;
     font-weight: 500;
     font-stretch: normal;
@@ -244,7 +618,7 @@ body, .root {
 }
 
 .installment-price {
-    font-family: "Spoqa Han Sans Neo","sans-serif";
+    font-family: "Spoqa Han Sans Neo", "sans-serif";
     margin-left: 10px;
     font-size: 15px;
     font-weight: 500;
@@ -405,11 +779,18 @@ body, .root {
     justify-content: space-between;
 }
 
+.week-toggle {
+    padding-top: 3px;
+    margin-right: 23px;
+    cursor: pointer;
+}
+
 .nav-list .nav-week .week-title {
+    display: flex;
     margin-right: 23px;
     cursor: pointer;
     padding-top: 3px;
-    font-family: "Spoqa Han Sans Neo","sans-serif";
+    font-family: "Spoqa Han Sans Neo", "sans-serif";
     font-size: 18px;
     font-weight: 500;
     font-stretch: normal;

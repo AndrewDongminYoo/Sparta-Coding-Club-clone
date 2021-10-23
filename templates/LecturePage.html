@@ -9,6 +9,9 @@
             window.onload = () => {
                 document.getElementById("class-video").setAttribute("src", "https://player.vimeo.com/video/457373588")
             }
+            function toggleModal() {
+                document.querySelector(".nav-modal").classList.remove("is-hidden")
+            }
         </script>
     {% endblock %}
 </head>
@@ -17,19 +20,19 @@
     <div class="root">
         <div class="wrapper">
             <div class="nav-container">
-                <div class="nav-bar">
+                <div class="nav-bar" onclick="toggleModal()">
                     <div class="title-number">0-1</div>
                     <div class="title-text">수강환경 튜토리얼</div>
                     <div class="title-button"><i class="fas fa-angle-down"></i></div>
                 </div>
                 <div style="position:relative">
                     <div class="nav-fix"></div>
-                    <div class="nav-modal">
+                    <div class="nav-modal is-hidden">
                         <div class="nav-list">
                             <div class="nav-week">
                                 <div class="week-title">
-                                    <div class="">
-
+                                    <div class="week-toggle">
+                                        <i class="fas fa-caret-right"></i>
                                     </div>
                                     <div class="">
                                         웹 프로그래밍 A-Z 심화 0주차
@@ -48,7 +51,8 @@
                         <div class="nav-list">
                             <div class="nav-week">
                                 <div class="week-title">
-                                    <div class="">
+                                    <div class="week-toggle">
+                                        <i class="fas fa-caret-right"></i>
                                     </div>
                                     <div class="">
                                         웹 프로그래밍 A-Z 심화 1주차
@@ -67,7 +71,8 @@
                         <div class="nav-list">
                             <div class="nav-week">
                                 <div class="week-title">
-                                    <div class="">
+                                    <div class="week-toggle">
+                                        <i class="fas fa-caret-right"></i>
                                     </div>
                                     <div class="">
                                         웹 프로그래밍 A-Z 심화 2주차
@@ -86,8 +91,8 @@
                         <div class="nav-list">
                             <div class="nav-week">
                                 <div class="week-title">
-                                    <div class="">
-
+                                    <div class="week-toggle">
+                                        <i class="fas fa-caret-right"></i>
                                     </div>
                                     <div class="">
                                         웹 프로그래밍 A-Z 심화 3주차
@@ -106,8 +111,8 @@
                         <div class="nav-list">
                             <div class="nav-week">
                                 <div class="week-title">
-                                    <div class="">
-
+                                    <div class="week-toggle">
+                                        <i class="fas fa-caret-right"></i>
                                     </div>
                                     <div class="">
                                         웹 프로그래밍 A-Z 심화 4주차
@@ -131,8 +136,7 @@
                                         <div class="text">
                                             4주차 이번주에 배울 것
                                         </div>
-                                        <div class="">
-                                        </div>
+                                        <i class="fas fa-check-circle"></i>
                                     </div>
                                     <div class="week-detail">
                                         <div class="">
@@ -141,8 +145,7 @@
                                         <div class="text">
                                             Bulma 로 웹사이트 꾸미기
                                         </div>
-                                        <div class="">
-                                        </div>
+                                        <i class="fas fa-check-circle"></i>
                                     </div>
                                     <div class="week-detail">
                                         <div class="">
@@ -151,8 +154,7 @@
                                         <div class="text">
                                             회원가입 기능
                                         </div>
-                                        <div class="">
-                                        </div>
+                                        <i class="fas fa-check-circle"></i>
                                     </div>
                                     <div class="week-detail">
                                         <div class="">
@@ -161,8 +163,7 @@
                                         <div class="text">
                                             로그인 기능
                                         </div>
-                                        <div class="">
-                                        </div>
+                                        <i class="fas fa-check-circle"></i>
                                     </div>
                                     <div class="week-detail">
                                         <div class="">
@@ -171,8 +172,7 @@
                                         <div class="text">
                                             프로젝트 4: Sweeter
                                         </div>
-                                        <div class="">
-                                        </div>
+                                        <i class="fas fa-check-circle"></i>
                                     </div>
                                     <div class="week-detail">
                                         <div class="">
@@ -181,8 +181,7 @@
                                         <div class="text">
                                             프로젝트 세팅
                                         </div>
-                                        <div class="">
-                                        </div>
+                                        <i class="fas fa-check-circle"></i>
                                     </div>
                                     <div class="week-detail">
                                         <div class="">
@@ -191,8 +190,7 @@
                                         <div class="text">
                                             로그인 &amp; 회원가입 페이지 모습 만들기
                                         </div>
-                                        <div class="">
-                                        </div>
+                                        <i class="fas fa-check-circle"></i>
                                     </div>
                                     <div class="week-detail">
                                         <div class="">
@@ -201,8 +199,7 @@
                                         <div class="text">
                                             회원가입 페이지 기능 만들기
                                         </div>
-                                        <div class="">
-                                        </div>
+                                        <i class="fas fa-check-circle"></i>
                                     </div>
                                     <div class="week-detail">
                                         <div class="">
@@ -211,8 +208,7 @@
                                         <div class="text">
                                             로그인 페이지 기능 만들기
                                         </div>
-                                        <div class="">
-                                        </div>
+                                        <i class="fas fa-check-circle"></i>
                                     </div>
                                     <div class="week-detail">
                                         <div class="">
@@ -221,8 +217,7 @@
                                         <div class="text">
                                             메인 페이지 모습 만들기
                                         </div>
-                                        <div class="">
-                                        </div>
+                                        <i class="fas fa-check-circle"></i>
                                     </div>
                                     <div class="week-detail">
                                         <div class="">
@@ -231,8 +226,7 @@
                                         <div class="text">
                                             메인 페이지 기능 만들기 - 포스팅
                                         </div>
-                                        <div class="">
-                                        </div>
+                                        <i class="fas fa-check-circle"></i>
                                     </div>
                                     <div class="week-detail">
                                         <div class="">
@@ -241,8 +235,7 @@
                                         <div class="text">
                                             메인 페이지 기능 만들기 - 좋아요
                                         </div>
-                                        <div class="">
-                                        </div>
+                                        <i class="fas fa-check-circle"></i>
                                     </div>
                                     <div class="week-detail">
                                         <div class="">
@@ -251,8 +244,7 @@
                                         <div class="text">
                                             프로필 페이지 모습 만들기 - 전체
                                         </div>
-                                        <div class="">
-                                        </div>
+                                        <i class="fas fa-check-circle"></i>
                                     </div>
                                     <div class="week-detail">
                                         <div class="">
@@ -261,8 +253,7 @@
                                         <div class="text">
                                             프로필 페이지 모습 만들기 - 프로필 수정
                                         </div>
-                                        <div class="">
-                                        </div>
+                                        <i class="fas fa-check-circle"></i>
                                     </div>
                                     <div class="week-detail">
                                         <div class="">
@@ -271,8 +262,7 @@
                                         <div class="text">
                                             프로필 페이지 기능 만들기
                                         </div>
-                                        <div class="">
-                                        </div>
+                                        <i class="fas fa-check-circle"></i>
                                     </div>
                                     <div class="week-detail">
                                         <div class="">
@@ -281,8 +271,7 @@
                                         <div class="text">
                                             4주차 끝 &amp; 숙제 설명
                                         </div>
-                                        <div class="">
-                                        </div>
+                                        <i class="fas fa-check-circle"></i>
                                     </div>
                                 </div>
                                 <div class="week-detail-list">
