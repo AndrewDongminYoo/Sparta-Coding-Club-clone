@@ -1,18 +1,7 @@
 # -*- coding: utf-8 -*-
 import uuid
 import mongoengine as me
-from application import application
-from flask_mongoengine import MongoEngine
-from flask_login import UserMixin, LoginManager
-
-application.config['MONGODB_SETTINGS'] = {
-    "db": "Lecture",
-    "port": 27017,
-    "host": "localhost"
-}
-db = MongoEngine(application)
-login_manager = LoginManager()
-login_manager.init_app(application)
+from flask_login import UserMixin
 
 
 class Lecture(me.Document):
@@ -46,14 +35,19 @@ class User(me.Document, UserMixin):
     done = me.ListField()
     seen = me.ListField()
 
+    def is_authenticated(self):
+        super()
 
-test_data = [
-    {"title": "웹개발종합반", "tutor": "이범규", "price": 800000, "discount_ratio": 0.29, "week": 8},
-    {"title": "리액트기초반", "tutor": "임민영", "price": 500000, "discount_ratio": 0.18, "week": 5},
-    {"title": "스프링기초반", "tutor": "남병관", "price": 500000, "discount_ratio": 0.18, "week": 5},
-]
+    def is_active(self):
+        super()
+
 
 if __name__ == '__main__':
+    test_data = [
+        {"title": "웹개발 종합반", "tutor": "이범규", "price": 800000, "discount_ratio": 0.29, "week": 8},
+        {"title": "리액트 기초반", "tutor": "임민영", "price": 500000, "discount_ratio": 0.18, "week": 5},
+        {"title": "스프링 기초반", "tutor": "남병관", "price": 500000, "discount_ratio": 0.18, "week": 5},
+    ]
     for data in test_data:
         doc = Course(
             id=uuid.uuid4(),

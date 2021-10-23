@@ -1,20 +1,36 @@
 # -*- coding: utf-8 -*-
+import datetime
 from flask import Flask, render_template, request, jsonify, make_response, abort, redirect
 from pymongo import MongoClient
+# from flask_login import current_user, login_user, logout_user
+from flask_login import LoginManager
+from apps.models import User
 from uuid import uuid4
 import os
 import json
+from flask_mongoengine import MongoEngine
+
 
 application = Flask(__name__, static_folder='static', template_folder='templates')
+application.config['MONGODB_SETTINGS'] = {
+    "db": "Lecture",
+    "port": 27017,
+    "host": "localhost"
+}
+client = MongoEngine()
+client.init_app(application)
 if application.env == 'development':
     os.popen('mongod')
     application.debug = True
 client = MongoClient('localhost', port=27017)
 db = client.get_database('Lecture')
 lectures = db.get_collection('lectures')
+users = db.get_collection("users")
 config_file = open("./config.json", mode="r")
 config_json = json.load(config_file)
 SECRET_KEY = config_json["SECRET_KEY"]
+login_manager = LoginManager()
+login_manager.init_app(application)
 
 
 @application.route('/')
@@ -28,8 +44,29 @@ def enrollment():
     # 보안을 신경 쓰면서 쿠키를 주고받을 수 있도록 make_response 사용
     response = make_response(render_template('EnrollPage.html'))
     if not request.cookies.get("username"):
-        response.set_cookie("username", uuid4().__str__())
-    return response
+        _id = uuid4().__str__()
+        username = "test"
+        password = "qwertyisweekpw"
+        created_at = datetime.datetime.utcnow()
+        done = []
+        seen = []
+        doc = User(
+            id=_id,
+            username=username,
+            password=password,
+            created_at=created_at,
+            done=done,
+            seen=seen
+        )
+        users.save(doc.to_mongo())
+        response.set_cookie("username", _id)
+        return response
+    try:
+        uuid = request.cookies.get("username")
+        user = users.find_one({"id": uuid})
+        response.set_cookie("user", json.dumps(user))
+    finally:
+        return response
 
 
 @application.route('/lecture')
@@ -45,6 +82,11 @@ def show_roadmap():
     if not request.cookies.get("username"):
         return abort(401)
     return render_template('RoadmapPage.html')
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return lectures.find_one({"username": user_id}, {"_id": False})
 
 
 if __name__ == '__main__':
