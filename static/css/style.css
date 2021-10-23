@@ -130,6 +130,10 @@ body, .root {
     margin-bottom: 8px;
 }
 
+.is-hidden {
+    display: none;
+}
+
 .lectures {
     width: 100%;
     padding: 16px 42px;
@@ -218,7 +222,7 @@ body, .root {
 }
 
 .colleague-info {
-    display: flex;
+    /*display: flex;*/
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
