@@ -10,7 +10,7 @@
                 document.getElementById("class-video").setAttribute("src", "https://player.vimeo.com/video/457373588")
             }
             function toggleModal() {
-                document.querySelector(".nav-modal").classList.remove("is-hidden")
+                document.querySelector(".nav-modal").classList.toggle("is-hidden")
             }
         </script>
     {% endblock %}
@@ -20,13 +20,13 @@
     <div class="root">
         <div class="wrapper">
             <div class="nav-container">
-                <div class="nav-bar" onclick="toggleModal()">
+                <div class="nav-bar">
                     <div class="title-number">0-1</div>
                     <div class="title-text">수강환경 튜토리얼</div>
                     <div class="title-button"><i class="fas fa-angle-down"></i></div>
                 </div>
                 <div style="position:relative">
-                    <div class="nav-fix"></div>
+                    <div class="nav-fix" onclick="toggleModal()"></div>
                     <div class="nav-modal is-hidden">
                         <div class="nav-list">
                             <div class="nav-week">

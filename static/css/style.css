@@ -6,6 +6,7 @@
 html {
     font-size: 14px;
     font-weight: 600;
+    background-color: #f1f3f5;
 }
 
 body, .root {
@@ -543,7 +544,7 @@ body, .root {
     }
 }
 
-.enrolment {
+.enrollment {
     width: 0;
     position: sticky;
     top: 150px;
@@ -555,8 +556,8 @@ body, .root {
     background-color: #fff;
 }
 
-.enrolment .enrol-header,
-.enrolment .enrol-head,
+.enrollment .enroll-header,
+.enrollment .enroll-head,
 .payment-installment {
     font-family: "Spoqa Han Sans Neo", "sans-serif";
     align-items: center;
@@ -570,10 +571,41 @@ body, .root {
     color: #212529;
 }
 
-.enrol-head h2 {
+.enroll-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 39px;
+}
+
+.enroll-footer div {
+    font-family: "Spoqa Han Sans Neo","sans-serif";
+    font-size: 14px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: -.7px;
+    color: #212529;
+}
+
+.enroll-head h2 {
     font-size: 20px;
     line-height: 1;
     letter-spacing: -.6px;
+}
+
+.payment-agreement {
+    font-family: "Spoqa Han Sans Neo", "sans-serif";
+    text-align: center;
+    color: #868e96;
+    font-size: 13px;
+}
+
+.payment-agreement * {
+    color: unset;
+    text-decoration: none;
+    font: unset;
 }
 
 .payment .payment-info,
@@ -747,10 +779,6 @@ body, .root {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.nav-modal.is-hidden {
-    display: none;
 }
 
 .nav-modal {

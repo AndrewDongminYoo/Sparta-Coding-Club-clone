@@ -3,17 +3,48 @@
 <head>
     {% block header %}
         {{ super() }}
-    <meta charset="UTF-8">
-    <title>SpartaCodingClub</title>
+        <meta charset="UTF-8">
+        <title>SpartaCodingClub</title>
+        <script>
+            let courseName = "{{ course_name }}"
+            window.onload = () => {
+                fetch("/api/enrollment")
+                .then((response)=>{
+                    let { price, discount_rate } = response
+                    let originPrice = price
+                    let discounting = price * discount_rate
+                    let discounted = price - discounting
+                    let installment = Math.trunc(discounted/6)
+                    let [first, second, third] = document.querySelectorAll("div.payment-info-right")
+                    first.textContent = originPrice.toLocaleString()+" 원"
+                    second.textContent = discounting.toLocaleString()+" 원"
+                    third.textContent = discounted.toLocaleString()+" 원"
+                    document.querySelector(".installment-discount").textContent = discount_rate.toString()+"% "
+                    document.querySelector(".installment-price span").textContent = installment.toLocaleString()
+
+                })
+            }
+            const body = JSON.stringify({courseName, mode: "cors"})
+            const init = {method: "POST", body}
+            function enrollment() {
+                fetch("/api/enrollment", init)
+                .then((response)=> {
+                    if (response.message === "success") {
+                        window.location.href="/rooadmap"
+                    }
+                })
+                .catch((err) => console.error(err))
+            }
+        </script>
     {% endblock %}
 </head>
 <body>
 {% block body %}
 <div class="root">
-    <section class="enrolment">
-        <div class="enrol-header">
-            <div class="enrol-head"><h2>수강신청하기</h2></div>
-            <div class="enrol-head" style="color: #868e96;"><h2>웹개발종합반</h2></div>
+    <section class="enrollment">
+        <div class="enroll-header">
+            <div class="enroll-head"><h2>수강신청하기</h2></div>
+            <div class="enroll-head" style="color: #868e96;"><h2>{{ course_name }}</h2></div>
         </div>
         <div class="payment">
             <div class="payment-info">
@@ -35,14 +66,14 @@
             <div class=installment>6개월 할부</div>
             <div class="installment-right">
                 <div class="installment-discount sparta-red-color">29%</div>
-                <div class="">월&nbsp;&nbsp;<span>95,000</span>원</div>
+                <div class="installment-price">월&nbsp;&nbsp;<span>95,000</span>원</div>
             </div>
         </div>
-        <div class="">
+        <div class="enroll-footer">
             <div class="">완주 시 5만 포인트 추가 환급</div>
         </div>
-        <div class="sparta-red-bg button" onclick="enrolment()">수강신청하기</div>
-        <div class="">
+        <div class="sparta-red-bg button" onclick="enrollment()">수강신청하기</div>
+        <div class="payment-agreement">
             <a href="https://www.notion.so/spartacodingclub/cb0c63c1145f4b60aacf0692a888e6fd">개인정보수집</a>,
             <a href="https://www.nicepay.co.kr/cs/terms/policy1.do">전자금융거래 기본약관</a>,<br>
             <a href="https://www.nicepay.co.kr/cs/terms/private.do">개인정보처리방침</a>에 동의합니다.
