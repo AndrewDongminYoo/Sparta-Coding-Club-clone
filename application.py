@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, render_template, request, jsonify, make_response, abort
+from flask import Flask, render_template, request, jsonify, make_response, abort, redirect
 from pymongo import MongoClient
 from uuid import uuid4
 import os
@@ -45,11 +45,6 @@ def show_roadmap():
     if not request.cookies.get("username"):
         return abort(401)
     return render_template('RoadmapPage.html')
-
-
-@application.errorhandler(401)
-def no_authentication():
-    return '401', 401
 
 
 if __name__ == '__main__':

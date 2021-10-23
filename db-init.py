@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from pymongo import MongoClient
-from apps.lecture import Lecture
+from apps.models import Lecture
 import os
 import csv
 
@@ -24,7 +24,3 @@ def get_DB():
                 playtime=line[6],
             )
             db.lectures.insert_one(doc.to_mongo())
-
-
-if __name__ == '__main__':
-    get_DB()
