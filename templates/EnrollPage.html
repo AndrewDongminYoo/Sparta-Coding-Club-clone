@@ -17,7 +17,7 @@
                     let installment = Math.trunc(discounted/6)
                     let [first, second, third] = document.querySelectorAll("div.payment-info-right")
                     first.textContent = originPrice.toLocaleString()+" 원"
-                    second.textContent = discounting.toLocaleString()+" 원"
+                    second.textContent = discounting.toLocaleString()+"-&nbsp;&nbsp;&nbsp; 원"
                     third.textContent = discounted.toLocaleString()+" 원"
                     document.querySelector(".installment-discount").textContent = discount_rate.toString()+"% "
                     document.querySelector(".installment-price span").textContent = installment.toLocaleString()
@@ -52,7 +52,7 @@
                 <div class="payment-info-right">800,000 원</div>
             </div>
             <div class="payment-info">
-                <div class="payment-info-left sparta-red-color">얼리버드 할인 금액</div>
+                <div class="payment-info-left sparta-red-color">할인 금액</div>
                 <div class="payment-info-right">-&nbsp;&nbsp;&nbsp;230,000 원
                 </div>
             </div>

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, render_template, request, jsonify
-from flask_login import LoginManager, current_user
+from flask import Flask, render_template, request, jsonify, make_response, abort
 from pymongo import MongoClient
+from uuid import uuid4
 import os
 import json
 
@@ -15,58 +15,42 @@ lectures = db.get_collection('lectures')
 config_file = open("./config.json", mode="r")
 config_json = json.load(config_file)
 SECRET_KEY = config_json["SECRET_KEY"]
-login_manager = LoginManager()
-login_manager.init_app(application)
 
 
 @application.route('/')
 def hello_world():
+    # 일단은 빈 페이지. 나중에 로그인 구현할 예정
     return 'Hello World!'
 
 
 @application.route('/enrollment')
 def enrollment():
-    return render_template('EnrollPage.html', course_name="웹개발종합반")
+    # 보안을 신경 쓰면서 쿠키를 주고받을 수 있도록 make_response 사용
+    response = make_response(render_template('EnrollPage.html'))
+    if not request.cookies.get("username"):
+        response.set_cookie("username", uuid4().__str__())
+    return response
 
 
 @application.route('/lecture')
 def show_video():
+    if not request.cookies.get("username"):
+        return abort(401)
+
     return render_template('LecturePage.html')
 
 
 @application.route('/roadmap')
 def show_roadmap():
+    if not request.cookies.get("username"):
+        return abort(401)
     return render_template('RoadmapPage.html')
 
 
-@application.route('/api/courses', methods=['GET', 'POST'])
-def show_courses():
-    if request.method == 'GET':
-        pass
-    elif request.method == "POST":
-        pass
-
-
-@application.route('/api/enrollment', methods=['GET', 'POST'])
-def post_enrollment():
-    if request.method == 'GET':
-        pass
-    elif request.method == "POST":
-        token = request.cookies.get('spartan_name')
-
-
-@application.route('/api/lecture', methods=['GET', 'POST'])
-def show_lecture():
-    if request.method == 'GET':
-        pass
-    elif request.method == "POST":
-        pass
-
-
-@login_manager.user_loader
-def load_user(uuid):
-    return get(uuid)
+@application.errorhandler(401)
+def no_authentication():
+    return '401', 401
 
 
 if __name__ == '__main__':
-    application.run()
+    application.run(debug=True)

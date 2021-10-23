@@ -18,6 +18,10 @@ body, .root {
     justify-content: center;
 }
 
+.root {
+    height: 100vh;
+}
+
 .wrapper {
     margin: 0;
     padding: 0;
