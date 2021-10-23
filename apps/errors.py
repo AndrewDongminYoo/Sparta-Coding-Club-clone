@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask import redirect
 from application import application
 

@@ -1,6 +1,9 @@
+# -*- coding: utf-8 -*-
+import uuid
 import mongoengine as me
 from application import application
 from flask_mongoengine import MongoEngine
+from flask_login import UserMixin, LoginManager
 
 application.config['MONGODB_SETTINGS'] = {
     "db": "Lecture",
@@ -8,8 +11,8 @@ application.config['MONGODB_SETTINGS'] = {
     "host": "localhost"
 }
 db = MongoEngine(application)
-# me.register_connection(db=db)
-# me.connect(db=db)
+login_manager = LoginManager()
+login_manager.init_app(application)
 
 
 class Lecture(me.Document):
@@ -17,9 +20,9 @@ class Lecture(me.Document):
     done = me.BooleanField()
     seen = me.BooleanField()
     playtime = me.IntField()
-    enrolled_detail_id = me.UUIDField()
-    enrolled_id = me.UUIDField()
-    lecture_id = me.UUIDField()
+    enrolled_detail_id = me.UUIDField(binary=False)
+    enrolled_id = me.UUIDField(binary=False)
+    lecture_id = me.UUIDField(binary=False)
     order = me.IntField()
     course_title = me.StringField(required=True)
     week = me.IntField()
@@ -35,6 +38,15 @@ class Course(me.Document):
     week = me.IntField(min_value=1, max_value=18)
 
 
+class User(me.Document, UserMixin):
+    id = me.UUIDField(binary=False)
+    username = me.StringField(max_length=32, unique=True)
+    password = me.StringField(max_length=64)
+    created_at = me.DateTimeField()
+    done = me.ListField()
+    seen = me.ListField()
+
+
 test_data = [
     {"title": "웹개발종합반", "tutor": "이범규", "price": 800000, "discount_ratio": 0.29, "week": 8},
     {"title": "리액트기초반", "tutor": "임민영", "price": 500000, "discount_ratio": 0.18, "week": 5},
@@ -44,6 +56,7 @@ test_data = [
 if __name__ == '__main__':
     for data in test_data:
         doc = Course(
+            id=uuid.uuid4(),
             title=data['title'],
             tutor=data['tutor'],
             week=data['week'],

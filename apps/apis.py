@@ -6,7 +6,6 @@ from application import application
 @application.route('/api/courses', methods=['GET', 'POST'])
 def show_courses():
     if request.method == 'GET':
-        # 유저에 따른 강의 목록 및 진도율 표기
         pass
     elif request.method == "POST":
         # 강의 페이지로 넘어가기 위한 유효성 검사

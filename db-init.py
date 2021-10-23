@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from pymongo import MongoClient
 from apps.models import Lecture
+from uuid import uuid4
 import os
 import csv
 
@@ -22,5 +23,12 @@ def get_DB():
                 week_order=line[4],
                 link=line[5],
                 playtime=line[6],
+                done=False,
+                seen=False,
+                lecture_id=uuid4()
             )
             db.lectures.insert_one(doc.to_mongo())
+
+
+if __name__ == '__main__':
+    get_DB()
