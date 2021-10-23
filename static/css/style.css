@@ -197,6 +197,15 @@ body, .root {
     align-items: center;
 }
 
+.detail-obj img,
+.detail-obj i {
+    width: 17px;
+    height: 17px;
+    object-fit: contain;
+    margin-right: 16px;
+    margin-bottom: 2px;
+}
+
 .colleague {
     display: flex;
     flex-direction: column;
@@ -271,6 +280,7 @@ body, .root {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 20px;
 }
 
 .detail-header-title {
@@ -395,7 +405,7 @@ body, .root {
     text-align: left;
     color: #000;
     padding-top: 3px;
-    overflow-x: hidden;
+    /*overflow-x: hidden;*/
     text-overflow: ellipsis;
     white-space: nowrap;
 }
@@ -442,7 +452,7 @@ body, .root {
     text-align: left;
     color: #000;
     padding-top: 3px;
-    overflow-x: hidden;
+    /*overflow-x: hidden;*/
     text-overflow: ellipsis;
     white-space: nowrap;
 }
