@@ -1,16 +1,16 @@
-function getCookie(name) {
-    let cookies = document.cookie.split("; ")
-    return cookies.find(c => c.startsWith(name))
-        .split("=")[1]
-        .replaceAll("\"","")
-}
+// function getCookie(name) {
+//     let cookies = document.cookie.split("; ")
+//     return cookies.find(c => c.startsWith(name))
+//         .split("=")[1]
+//         .replaceAll("\"","")
+// }
 
 function fixedTime(sec) {
     let clock = new Date(sec * 1000)
     return [clock.getUTCHours(), clock.getMinutes(), clock.getSeconds()].map(v => v.toString().padStart(2, '0'))
 }
 
-const check = done => done
+const check = seen => seen
     ? '<i class="fas fa-check-circle"></i>'
     : '<i class="far fa-check-circle"></i>'
 
@@ -36,15 +36,15 @@ function getCourseListForRoadmap() {
             let totalPlaytime = 0
             let seenIndex = 0
             response["courses"].forEach((klass) => {
-                let {title, done, order, week, week_order, playtime} = klass
-                if (done) seenIndex = order;
+                let {title, seen, order, week, week_order, playtime} = klass
+                if (seen) seenIndex = order;
                 let playtimeFixed = fixedTime(playtime)[1] + ":" + fixedTime(playtime)[2]
                 div.innerHTML += `
                     <div class="week-body" onclick="openCourse(${order})">
                         <div class="week-detail-num">${week}-${week_order}</div>
                         <div class="week-detail-title">[${week} 주차] ${title}</div>
                         <div class="week-detail-playtime">${playtimeFixed}</div>
-                        <div class="week-detail-seen">${check(done)}</div>
+                        <div class="week-detail-seen">${check(seen)}</div>
                     </div>`
                 totalPlaytime += playtime
             })
@@ -110,13 +110,13 @@ function lectureNav() {
             let div = document.querySelector(".week-detail-list")
             let seenIndex = 0
             response["courses"].forEach((klass) => {
-                let {title, done, order, week, week_order} = klass
-                if (done) seenIndex = order;
+                let {title, seen, order, week, week_order} = klass
+                if (seen) seenIndex = order;
                 div.innerHTML += `
                     <div class="week-detail">
                         <div class="">${week}-${week_order}</div>
                         <div class="text">${title}</div>
-                        <i class="${done ? "fas" : "far"} fa-check-circle"></i>
+                        <i class="${seen ? "fas" : "far"} fa-check-circle"></i>
                     </div>`
             })
         })

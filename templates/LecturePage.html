@@ -16,10 +16,12 @@
             }
 
             function nextLecture() {
-                fetch("/api/lectures")
+                const lecture_id = window.location.pathname.substring(9,)
+                fetch(`/api/lecture?id=${lecture_id}`)
                     .then((resp) => resp.json())
                     .then((response) => {
-                        console.log(response)
+                        let id = response["lecture_id"]
+                        window.location.href=`/lecture/${id}`
                     })
             }
         </script>
@@ -36,6 +38,7 @@
                     <div class="title-text">{{ lecture.title }}</div>
                     <div class="title-button"><i class="fas fa-angle-down"></i></div>
                 </div>
+                <div class="next-button" onclick="nextLecture()"><span>다음 강의로!</span></div>
                 <div style="position:relative;">
                     <div class="nav-fix"></div>
                     <div class="nav-modal is-hidden">

@@ -50,14 +50,12 @@ def enrollment():
         username = "test"
         password = "qwerty-is-week-pw"
         created_at = datetime.datetime.utcnow()
-        done = []
         seen = []
         doc = User(
             uuid=_id,
             username=username,
             password=password,
             created_at=created_at,
-            done=done,
             seen=seen,
             courses=[]
         )

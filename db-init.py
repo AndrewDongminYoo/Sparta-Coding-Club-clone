@@ -23,7 +23,6 @@ def get_DB():
                 week_order=line[4],
                 link=line[5],
                 playtime=line[6],
-                done=False,
                 seen=False,
                 lecture_id=uuid4()
             )
