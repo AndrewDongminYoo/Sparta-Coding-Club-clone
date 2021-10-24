@@ -6,7 +6,6 @@ from flask_login import UserMixin
 
 class Lecture(me.Document):
     title = me.StringField(required=True)
-    done = me.BooleanField()
     seen = me.BooleanField()
     playtime = me.IntField()
     enrolled_detail_id = me.UUIDField(binary=False)
@@ -32,7 +31,6 @@ class User(me.Document, UserMixin):
     username = me.StringField(max_length=32, unique=True)
     password = me.StringField(max_length=64)
     created_at = me.DateTimeField()
-    done = me.ListField()
     seen = me.ListField()
     courses = me.ListField()
 

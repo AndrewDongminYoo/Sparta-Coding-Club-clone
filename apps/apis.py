@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import request, jsonify, make_response, Blueprint, json, abort, url_for, render_template
-from flask_login import current_user
+from flask import request, jsonify, make_response, Blueprint, json, abort
 from pymongo import MongoClient
 
 me = MongoClient()
@@ -43,9 +42,8 @@ def show_courses():
         lecture = list(lectures.find(
             {"course_title": course_name}, {"_id": False, "link": False}))
         if course_name in courses_list:
-            done = user["done"]
             seen = user["seen"]
-            return jsonify({"done": done, "seen": seen, "course_title": course_name, "courses": lecture})
+            return jsonify({"seen": seen, "course_title": course_name, "courses": lecture})
         else:
             print("Cannot Open Course--")
             return abort(401)
@@ -73,8 +71,15 @@ def show_courses():
 @bp.route('/lecture', methods=['GET', 'POST'])
 def show_lecture():
     if request.method == 'GET':
-        print(request.base_url)
-        return
+        lecture_id = request.args.get("id")
+        user_id = request.cookies.get("username")
+        user = users.find_one({"uuid": user_id})
+        user["seen"].append(lecture_id)
+        users.update_one({"uuid": user_id}, {"$set": user})
+        lecture = lectures.find_one({"lecture_id": lecture_id})
+        order = lecture["order"]
+        next_lecture = lectures.find_one({"order": order+1})["lecture_id"]
+        return {"message": "success", "lecture_id": next_lecture}
     elif request.method == "POST":
         user_id = request.cookies.get("username")
         course_name = request.cookies.get('course')

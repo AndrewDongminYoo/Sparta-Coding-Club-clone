@@ -10,12 +10,14 @@ import os
 import json
 from flask_mongoengine import MongoEngine
 
+config_file = open("./config.json", mode="r")
+config_json = json.load(config_file)
 
 application = Flask(__name__, static_folder='static', template_folder='templates')
 application.register_blueprint(apis.bp)
 application.config['MONGODB_SETTINGS'] = {
     "db": "Lecture",
-    "port": 27017,
+    "port": config_json["DB_PATH"] or 'localhost',
     "host": "localhost"
 }
 client = MongoEngine()
@@ -23,16 +25,16 @@ client.init_app(application)
 if application.env == 'development':
     os.popen('mongod')
     application.debug = True
-client = MongoClient('localhost', port=27017)
+
+SECRET_KEY = config_json["SECRET_KEY"]
+login_manager = LoginManager()
+login_manager.init_app(application)
+
+client = MongoClient(config_json["DB_PATH"], port=27017)
 db = client.get_database('Lecture')
 lectures = db.get_collection('lectures')
 users = db.get_collection("users")
 courses = db.get_collection("courses")
-config_file = open("./config.json", mode="r")
-config_json = json.load(config_file)
-SECRET_KEY = config_json["SECRET_KEY"]
-login_manager = LoginManager()
-login_manager.init_app(application)
 
 
 @application.route('/')
@@ -47,17 +49,15 @@ def enrollment():
     response = make_response(render_template('EnrollPage.html', course_name="웹개발 종합반"))
     if not request.cookies.get("username"):
         _id = uuid4().__str__()
-        username = "test"
+        username = "test1345654324567"
         password = "qwerty-is-week-pw"
         created_at = datetime.datetime.utcnow()
-        done = []
         seen = []
         doc = User(
             uuid=_id,
             username=username,
             password=password,
             created_at=created_at,
-            done=done,
             seen=seen,
             courses=[]
         )
