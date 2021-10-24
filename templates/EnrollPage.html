@@ -16,23 +16,23 @@
                     let discounting = price * discount_ratio
                     let discounted = price - discounting
                     let installment = discounted/6
-                    console.log(price, discount_ratio)
                     let [first, second, third] = document.querySelectorAll("div.payment-info-right")
-                    first.textContent = originPrice.toLocaleString("ko")+" 원"
-                    second.textContent = discounting.toLocaleString("ko")+" 원"
-                    third.textContent = discounted.toLocaleString("ko")+" 원"
+                    first.textContent = originPrice.toLocaleString()+" 원"
+                    second.textContent = "- "+discounting.toLocaleString()+" 원"
+                    third.textContent = discounted.toLocaleString()+" 원"
                     document.querySelector(".installment-discount").textContent = (discount_ratio*100).toFixed()+"% "
                     document.querySelector(".installment-price span").textContent = installment.toLocaleString("ko", {maximumFractionDigits:0})
 
                 })
             }
-            const body = JSON.stringify({courseName, mode: "cors"})
-            const init = {method: "POST", body}
             function enrollment() {
+                const body = JSON.stringify({courseName, mode: "cors"})
+                const init = {method: "POST", body}
                 fetch("/api/enrollment", init)
+                .then((resp)=> resp.json())
                 .then((response)=> {
-                    if (response.message === "success") {
-                        window.location.href="/rooadmap"
+                    if (response.message) {
+                        window.location.href="/roadmap"
                     }
                 })
                 .catch((err) => console.error(err))
@@ -51,24 +51,24 @@
         <div class="payment">
             <div class="payment-info">
                 <div class="payment-info-left">총 상품 금액</div>
-                <div class="payment-info-right">800,000 원</div>
+                <div class="payment-info-right"></div>
             </div>
             <div class="payment-info">
                 <div class="payment-info-left sparta-red-color">할인 금액</div>
-                <div class="payment-info-right">-&nbsp;&nbsp;&nbsp;230,000 원
+                <div class="payment-info-right">
                 </div>
             </div>
             <div class="payment-info">
                 <div class="payment-info-left">결제 가격</div>
-                <div class="payment-info-right">570,000 원</div>
+                <div class="payment-info-right"></div>
             </div>
         </div>
         <div class="payment-divider"></div>
         <div class="payment-installment">
             <div class=installment>6개월 할부</div>
             <div class="installment-right">
-                <div class="installment-discount sparta-red-color">29%</div>
-                <div class="installment-price">월&nbsp;&nbsp;<span>95,000</span>원</div>
+                <div class="installment-discount sparta-red-color"></div>
+                <div class="installment-price">월&nbsp;&nbsp;<span></span>원</div>
             </div>
         </div>
         <div class="enroll-footer">

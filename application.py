@@ -53,12 +53,13 @@ def enrollment():
         done = []
         seen = []
         doc = User(
-            id=_id,
+            uuid=_id,
             username=username,
             password=password,
             created_at=created_at,
             done=done,
-            seen=seen
+            seen=seen,
+            courses=[]
         )
         users.save(doc.to_mongo())
         response.set_cookie("username", _id)
@@ -71,18 +72,18 @@ def enrollment():
         return response
 
 
-@application.route('/lecture')
-def show_video():
-    if not request.cookies.get("username"):
-        return abort(401)
-    return render_template('LecturePage.html')
-
-
 @application.route('/roadmap')
 def show_roadmap():
     if not request.cookies.get("username"):
         return abort(401)
     return render_template('RoadmapPage.html')
+
+
+@application.route('/lecture')
+def show_video():
+    if not request.cookies.get("username"):
+        return abort(401)
+    return render_template('LecturePage.html')
 
 
 @login_manager.user_loader

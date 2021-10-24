@@ -28,12 +28,13 @@ class Course(me.Document):
 
 
 class User(me.Document, UserMixin):
-    id = me.UUIDField(binary=False)
+    uuid = me.UUIDField(binary=False)
     username = me.StringField(max_length=32, unique=True)
     password = me.StringField(max_length=64)
     created_at = me.DateTimeField()
     done = me.ListField()
     seen = me.ListField()
+    courses = me.ListField()
 
     def is_authenticated(self):
         super()

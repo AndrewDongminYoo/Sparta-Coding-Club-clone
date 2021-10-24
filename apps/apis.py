@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from flask import request, jsonify, make_response, Blueprint
+from flask import before_render_template, request, jsonify, make_response, Blueprint, json, abort, url_for, \
+    render_template
 from pymongo import MongoClient
 
 me = MongoClient()
@@ -18,23 +19,39 @@ def post_enrollment():
         course = courses.find_one({"title": title}, {"_id": False})
         return jsonify(course)
     elif request.method == "POST":
-        print("POST")
         user_id = request.cookies.get("username")
-        print(user_id)
-        course_name = request.path.split("/")[-1]
-        print(course_name)
-        user = users.find_one({"_id": user_id})
-        print(user)
-        pass
+        course_name = json.loads(request.data.decode('utf8'))['courseName']
+        user = users.find_one({"uuid": user_id})
+        courses_list = user['courses']
+        if course_name in courses_list:
+            return {"message": "courses already exists"}
+        courses_list.append(course_name)
+        print(courses_list)
+        users.update_one({"uuid": user_id}, {"$set": user}, upsert=True)
+        response = make_response(jsonify(courses_list))
+        response.set_cookie("course", course_name)
+        return response
 
 
 @bp.route('/courses', methods=['GET', 'POST'])
 def show_courses():
     if request.method == 'GET':
-        pass
+        user_id = request.cookies.get("username")
+        course_name = request.cookies.get('course')
+        user = users.find_one({"uuid": user_id})
+        courses_list = user['courses']
+        lecture = list(lectures.find(
+            {"course_title": course_name}, {"_id": False, "link": False}))
+        if course_name in courses_list:
+            done = user["done"]
+            seen = user["seen"]
+            return jsonify({"done": done, "seen": seen, "courses": lecture})
+        else:
+            print("Cannot Open Course--")
+            return abort(401)
     elif request.method == "POST":
         # 강의 페이지로 넘어가기 위한 유효성 검사
-        pass
+        return
 
 
 @bp.route('/lecture', methods=['GET', 'POST'])

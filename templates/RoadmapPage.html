@@ -6,6 +6,35 @@
         <meta charset="UTF-8">
         <title>SpartaCodingClub</title>
         <script>
+            function fixedTime(time) {
+                return [String(Math.trunc(time/60)).padStart(2,'0'), String((time%60)).padStart(2,'0')]
+            }
+            const check = bool => bool ? '<i class="fas fa-check-circle"></i>' : '<i class="far fa-check-circle"></i>'
+            window.onload = function () {
+                const courseName = getCookie("course")
+                fetch("/api/courses")
+                .then((resp)=> resp.json())
+                .then((response)=> {
+                    let div = document.querySelector(".round-week-detail-body")
+                    let totalPlaytime = 0
+                    response["courses"].forEach((klass)=>{
+                        let {title, done, seen, order, week, week_order, playtime} = klass
+                        let playtimeFixed = fixedTime(playtime)[0]+":"+fixedTime(playtime)[1]
+                        div.innerHTML += `
+                            <div class="week-body">
+                                <div class="week-detail-num">${week}-${week_order}</div>
+                                <div class="week-detail-title">[${week} 주차] ${title}</div>
+                                <div class="week-detail-playtime">${playtimeFixed}</div>
+                                <div class="week-detail-seen">${check(done)}</div>
+                            </div>`
+                        totalPlaytime+=playtime
+                    })
+                    document.querySelector(".detail-obj").textContent =
+                        fixedTime(totalPlaytime)[0]+"시간 "+fixedTime(totalPlaytime)[1]+"분"
+                })
+                .catch((err) => console.error(err))
+            }
+        
             function toggleList() {
                 document.querySelector(".round-week-detail-body").classList.toggle("is-hidden")
             }
@@ -70,102 +99,19 @@
                                                         <i class="fas fa-chevron-up"></i>
                                                     </div>
                                                 </div>
-                                                <div class="round-week-detail-body">
-                                                    <div class="week-body highlighted">
-                                                        <div class="week-detail-num">1-1</div>
-                                                        <div class="week-detail-title">[1주차] 이번 주 배울 것</div>
-                                                        <div class="week-detail-playtime">12:55</div>
-                                                        <div class="week-detail-seen"></div>
-                                                    </div>
-                                                    <div class="week-body">
-                                                        <div class="week-detail-num">1-2</div>
-                                                        <div class="week-detail-title">필수 프로그램 설치 안내</div>
-                                                        <div class="week-detail-playtime">04:16</div>
-                                                        <div class="week-detail-seen"></div>
-                                                    </div>
-                                                    <div class="week-body">
-                                                        <div class="week-detail-num">1-3</div>
-                                                        <div class="week-detail-title">[1주차] 일단 스프링 작동시키기</div>
-                                                        <div class="week-detail-playtime">12:21</div>
-                                                        <div class="week-detail-seen"></div>
-                                                    </div>
-                                                    <div class="week-body">
-                                                        <div class="week-detail-num">1-4</div>
-                                                        <div class="week-detail-title">[1주차] 웹의 기본 개념</div>
-                                                        <div class="week-detail-playtime">07:15</div>
-                                                        <div class="week-detail-seen"></div>
-                                                    </div>
-                                                    <div class="week-body">
-                                                        <div class="week-detail-num">1-5</div>
-                                                        <div class="week-detail-title">[1주차] 자바 기초 문법 - 1</div>
-                                                        <div class="week-detail-playtime">11:09</div>
-                                                        <div class="week-detail-seen"></div>
-                                                    </div>
-                                                    <div class="week-body">
-                                                        <div class="week-detail-num">1-6</div>
-                                                        <div class="week-detail-title">[1주차] 자바 기초 문법 - 2</div>
-                                                        <div class="week-detail-playtime">15:10</div>
-                                                        <div class="week-detail-seen"></div>
-                                                    </div>
-                                                    <div class="week-body">
-                                                        <div class="week-detail-num">1-7</div>
-                                                        <div class="week-detail-title">[1주차] 자바 기초 문법 - 3</div>
-                                                        <div class="week-detail-playtime">14:27</div>
-                                                        <div class="week-detail-seen"></div>
-                                                    </div>
-                                                    <div class="week-body">
-                                                        <div class="week-detail-num">1-8</div>
-                                                        <div class="week-detail-title">[1주차] 자바 기초 문법 - 4</div>
-                                                        <div class="week-detail-playtime">18:35</div>
-                                                        <div class="week-detail-seen"></div>
-                                                    </div>
-                                                    <div class="week-body">
-                                                        <div class="week-detail-num">1-9</div>
-                                                        <div class="week-detail-title">[1주차] 자바 클래스</div>
-                                                        <div class="week-detail-playtime">13:42</div>
-                                                        <div class="week-detail-seen"></div>
-                                                    </div>
-                                                    <div class="week-body">
-                                                        <div class="week-detail-num">1-10</div>
-                                                        <div class="week-detail-title">[1주차] Getter, Setter</div>
-                                                        <div class="week-detail-playtime">11:56</div>
-                                                        <div class="week-detail-seen"></div>
-                                                    </div>
-                                                    <div class="week-body">
-                                                        <div class="week-detail-num">1-11</div>
-                                                        <div class="week-detail-title">[1주차] 브라우저에 바로 나타내보기</div>
-                                                        <div class="week-detail-playtime">10:24</div>
-                                                        <div class="week-detail-seen">
-                                                        </div>
-                                                    </div>
-                                                    <div class="week-body">
-                                                        <div class="week-detail-num">1-12</div>
-                                                        <div class="week-detail-title">[1주차] 그레이들(Gradle)이란?</div>
-                                                        <div class="week-detail-playtime">06:47</div>
-                                                        <div class="week-detail-seen">
-                                                        </div>
-                                                    </div>
-                                                    <div class="week-body">
-                                                        <div class="week-detail-num">1-13</div>
-                                                        <div class="week-detail-title">[1주차] 끝 &amp; 숙제설명</div>
-                                                        <div class="week-detail-playtime">02:26</div>
-                                                        <div class="week-detail-seen">
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <div class="round-week-detail-body"></div>
                                             </div>
                                     </div>
                                     <div class="homeworks">
                                         <div class="week-homework">
-                                            <div class="week-homework-title">1주차 숙제 Person 클래스 만들고, 내 정보 브라우저에
-                                                띄워보기
+                                            <div class="week-homework-title">숙제
                                             </div>
                                             <div class="week-homework-status">제출전</div>
                                         </div>
                                     </div>
                                     <div class="wil">
                                         <div class="round-wil">
-                                            <div class="round-wil-title">1주차 개발일지 쓰기</div>
+                                            <div class="round-wil-title">개발일지</div>
                                             <div class="round-wil-status">제출전</div>
                                         </div>
                                     </div>
