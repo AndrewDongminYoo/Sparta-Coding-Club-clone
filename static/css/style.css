@@ -746,6 +746,7 @@ body, .root {
     background-color: #fff;
     cursor: pointer;
     position: relative;
+    z-index: 100;
 }
 
 .nav-bar .title-number {
@@ -803,7 +804,7 @@ body, .root {
 .nav-fix {
     display: block;
     position: fixed;
-    z-index: 99;
+    /*z-index: 99;*/
     left: 0;
     top: 0;
     width: 100%;
