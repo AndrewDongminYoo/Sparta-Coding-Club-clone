@@ -8,34 +8,7 @@
         <script>
             let courseName = "{{ course_name }}"
             window.onload = () => {
-                fetch(`/api/enrollment?title=${courseName}`)
-                .then((resp)=>resp.json())
-                .then((response)=>{
-                    let { price, discount_ratio } = response
-                    let originPrice = price
-                    let discounting = price * discount_ratio
-                    let discounted = price - discounting
-                    let installment = discounted/6
-                    let [first, second, third] = document.querySelectorAll("div.payment-info-right")
-                    first.textContent = originPrice.toLocaleString()+" 원"
-                    second.textContent = "- "+discounting.toLocaleString()+" 원"
-                    third.textContent = discounted.toLocaleString()+" 원"
-                    document.querySelector(".installment-discount").textContent = (discount_ratio*100).toFixed()+"% "
-                    document.querySelector(".installment-price span").textContent = installment.toLocaleString("ko", {maximumFractionDigits:0})
-
-                })
-            }
-            function enrollment() {
-                const body = JSON.stringify({courseName, mode: "cors"})
-                const init = {method: "POST", body}
-                fetch("/api/enrollment", init)
-                .then((resp)=> resp.json())
-                .then((response)=> {
-                    if (response.message) {
-                        window.location.href="/roadmap"
-                    }
-                })
-                .catch((err) => console.error(err))
+                getDataForEnrollment(courseName)
             }
         </script>
     {% endblock %}

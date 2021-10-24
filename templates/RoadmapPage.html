@@ -6,37 +6,8 @@
         <meta charset="UTF-8">
         <title>SpartaCodingClub</title>
         <script>
-            function fixedTime(time) {
-                return [String(Math.trunc(time/60)).padStart(2,'0'), String((time%60)).padStart(2,'0')]
-            }
-            const check = bool => bool ? '<i class="fas fa-check-circle"></i>' : '<i class="far fa-check-circle"></i>'
             window.onload = function () {
-                const courseName = getCookie("course")
-                fetch("/api/courses")
-                .then((resp)=> resp.json())
-                .then((response)=> {
-                    let div = document.querySelector(".round-week-detail-body")
-                    let totalPlaytime = 0
-                    response["courses"].forEach((klass)=>{
-                        let {title, done, seen, order, week, week_order, playtime} = klass
-                        let playtimeFixed = fixedTime(playtime)[0]+":"+fixedTime(playtime)[1]
-                        div.innerHTML += `
-                            <div class="week-body">
-                                <div class="week-detail-num">${week}-${week_order}</div>
-                                <div class="week-detail-title">[${week} 주차] ${title}</div>
-                                <div class="week-detail-playtime">${playtimeFixed}</div>
-                                <div class="week-detail-seen">${check(done)}</div>
-                            </div>`
-                        totalPlaytime+=playtime
-                    })
-                    document.querySelector(".detail-obj").textContent =
-                        fixedTime(totalPlaytime)[0]+"시간 "+fixedTime(totalPlaytime)[1]+"분"
-                })
-                .catch((err) => console.error(err))
-            }
-        
-            function toggleList() {
-                document.querySelector(".round-week-detail-body").classList.toggle("is-hidden")
+                getCourseListForRoadmap()
             }
         </script>
     {% endblock %}
@@ -55,52 +26,53 @@
                             <div class="content-main">
                                 <div class="round-week">
                                     <div class="lectures">
-                                            <div class="roadmap-header">
-                                                <div class="header-summary">
-                                                    <div class="summary-title">
-                                                        <span class="summary-header">배우기</span>
-                                                        웹개발의봄, Spring 1주차
-                                                    </div>
-                                                    <div class="summary-detail">
-                                                        <div class="detail-obj">
-                                                            <i class="fas fa-clock"></i>2시간 21분
-                                                        </div>
-                                                        <div class="detail-obj">
-                                                            <i class="fas fa-exclamation-triangle"></i>9월 19일(일)
-                                                        </div>
-                                                        <div class="detail-mat">
-                                                            <a href="" target="">강의자료
-                                                                <i class="fas fa-external-link-alt"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
+                                        <div class="roadmap-header">
+                                            <div class="header-summary">
+                                                <div class="summary-title">
+                                                    <span class="summary-header">배우기</span>
                                                 </div>
-                                                <div class="header-colleague">
-                                                    <div class="colleague">
-                                                        <div class="colleague-info">유동민 님 외<br>
-                                                            <span class="colleague-num">3</span>명이 듣고 있어요. 우와!👏
-                                                        </div>
-                                                        <div class="colleague-profiles">
-                                                            <img src="/static/images/rtan01.png" alt="">
-                                                            <img src="/static/images/rtan02.png" alt="">
-                                                            <img src="/static/images/rtan03.png" alt="">
-                                                        </div>
+                                                <div class="summary-detail">
+                                                    <div class="detail-obj">
+                                                        <i class="fas fa-clock"></i>
+                                                    </div>
+                                                    <div class="detail-obj">
+                                                        <i class="fas fa-exclamation-triangle"></i>9월 19일(일)
+                                                    </div>
+                                                    <div class="detail-mat">
+                                                        <a href="https://www.notion.so/565aa5540e08496b9ed62beda35ed8da"
+                                                           target="_blank">강의자료
+                                                            <i class="fas fa-external-link-alt"></i>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="dotted-hr">
-                                            </div>
-                                            <div class="round-week-detail">
-                                                <div class="week-detail-header">
-                                                    <div class="detail-header-title">강의 목록</div>
-                                                    <div class="detail-header">
-                                                        <span class="detail-toggle" onclick="toggleList()">목록 닫기</span>
-                                                        {#<i class="fas fa-chevron-down"></i>#}
-                                                        <i class="fas fa-chevron-up"></i>
+                                            <div class="header-colleague">
+                                                <div class="colleague">
+                                                    <div class="colleague-info">유동민 님 외<br>
+                                                        <span class="colleague-num">3</span>명이 듣고 있어요. 우와!👏
+                                                    </div>
+                                                    <div class="colleague-profiles">
+                                                        <img src="/static/images/rtan01.png" alt="">
+                                                        <img src="/static/images/rtan02.png" alt="">
+                                                        <img src="/static/images/rtan03.png" alt="">
                                                     </div>
                                                 </div>
-                                                <div class="round-week-detail-body"></div>
                                             </div>
+                                        </div>
+                                        <div class="dotted-hr">
+                                        </div>
+                                        <div class="round-week-detail">
+                                            <div class="week-detail-header">
+                                                <div class="detail-header-title">강의 목록</div>
+                                                <div class="detail-header">
+                                                    <span class="detail-toggle" onclick="toggleList()">목록 닫기</span>
+                                                    <i class="fas fa-chevron-down is-hidden"></i>
+                                                    <i class="fas fa-chevron-up"></i>
+
+                                                </div>
+                                            </div>
+                                            <div class="round-week-detail-body"></div>
+                                        </div>
                                     </div>
                                     <div class="homeworks">
                                         <div class="week-homework">

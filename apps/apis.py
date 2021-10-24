@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from flask import before_render_template, request, jsonify, make_response, Blueprint, json, abort, url_for, \
-    render_template
+from flask import request, jsonify, make_response, Blueprint, json, abort, url_for, render_template
+from flask_login import current_user
 from pymongo import MongoClient
 
 me = MongoClient()
@@ -45,21 +45,49 @@ def show_courses():
         if course_name in courses_list:
             done = user["done"]
             seen = user["seen"]
-            return jsonify({"done": done, "seen": seen, "courses": lecture})
+            return jsonify({"done": done, "seen": seen, "course_title": course_name, "courses": lecture})
         else:
             print("Cannot Open Course--")
             return abort(401)
     elif request.method == "POST":
-        # 강의 페이지로 넘어가기 위한 유효성 검사
-        return
+        user_id = request.cookies.get("username")
+        course_name = request.cookies.get('course')
+        body = json.loads(request.data.decode())
+        order = body["order"]
+        user = users.find_one({"uuid": user_id})
+        courses_list = user['courses']
+        if course_name not in courses_list:
+            print("you didn't pay for that...")
+            return {"message": "올바르지 않은 접근입니다.", "status": 401}
+        if order != 1:
+            if order-1 not in user["seen"]:
+                return {"message": "앞에 강의를 먼저 수강해주세요!", "status": 401}
+        link = lectures.find_one({"order": order})["lecture_id"]
+        seen = user["seen"]
+        seen.append(order)
+        lectures.update_one({"lecture_id": link}, {"$set": {"seen": True}})
+        users.update_one({"uuid": user_id}, {"$set": user})
+        return {"message": "success", "lecture_id": link}
 
 
 @bp.route('/lecture', methods=['GET', 'POST'])
 def show_lecture():
     if request.method == 'GET':
-        # 강의의 회차 수 정보를 받아 디비에 있는 해당 주차 수업 영상 주소를 리턴
-        pass
+        print(request.base_url)
+        return
     elif request.method == "POST":
-        # 강의를 다 보았을 때나 다른 강의로 넘어가려 할 때 가능한지 체크 후 리턴
-        pass
+        user_id = request.cookies.get("username")
+        course_name = request.cookies.get('course')
+        print(request.base_url)
+        body = json.loads(request.data.decode())
+        order = body["order"]
+        user = users.find_one({"uuid": user_id})
+        courses_list = user['courses']
+        if course_name not in courses_list:
+            print("you didn't pay for that...")
+            return {"message": "올바르지 않은 접근입니다.", "status": 401}
+        if order != 1:
+            if order-1 not in user["seen"]:
+                return {"message": "앞에 강의를 먼저 수강해주세요!", "status": 401}
+        return
 

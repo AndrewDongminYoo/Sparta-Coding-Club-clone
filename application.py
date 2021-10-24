@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 import datetime
-from flask import Flask, render_template, request, make_response, abort, redirect, jsonify
+from flask import Flask, render_template, request, make_response, abort
 from pymongo import MongoClient
 from apps import apis
-from flask_login import current_user, login_user, logout_user, LoginManager
+from flask_login import LoginManager
 from apps.models import User
 from uuid import uuid4
 import os
@@ -79,11 +79,12 @@ def show_roadmap():
     return render_template('RoadmapPage.html')
 
 
-@application.route('/lecture')
-def show_video():
+@application.route('/lecture/<string:lecture_id>')
+def show_video(lecture_id):
     if not request.cookies.get("username"):
         return abort(401)
-    return render_template('LecturePage.html')
+    lecture = lectures.find_one({"lecture_id": lecture_id}, {"_id": False})
+    return render_template('LecturePage.html', lecture=lecture)
 
 
 @login_manager.user_loader
