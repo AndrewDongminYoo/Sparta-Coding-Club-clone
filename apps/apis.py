@@ -82,17 +82,16 @@ def show_lecture():
         return {"message": "success", "lecture_id": next_lecture}
     elif request.method == "POST":
         user_id = request.cookies.get("username")
-        course_name = request.cookies.get('course')
         print(request.base_url)
         body = json.loads(request.data.decode())
         order = body["order"]
+        lectures.update_one({"order": order}, {"$set": {"seen": True}})
         user = users.find_one({"uuid": user_id})
-        courses_list = user['courses']
-        if course_name not in courses_list:
-            print("you didn't pay for that...")
-            return {"message": "올바르지 않은 접근입니다.", "status": 401}
+        lecture_id = lectures.find_one({"order": order})["lecture_id"]
+        user["seen"].append(lecture_id)
         if order != 1:
             if order-1 not in user["seen"]:
-                return {"message": "앞에 강의를 먼저 수강해주세요!", "status": 401}
-        return
+                return {"message": "앞 강의를 먼저 수강해주세요!", "status": 401}
+        next_lecture = lectures.find_one({"order": order+1})["lecture_id"]
+        return {"message": "success", "lecture_id": next_lecture}
 

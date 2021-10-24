@@ -8,21 +8,6 @@
         <script>
             window.onload = () => {
                 lectureNav()
-                document.getElementById("class-video").setAttribute("src", "https://player.vimeo.com/video/457373588")
-            }
-
-            function toggleModal() {
-                document.querySelector(".nav-modal").classList.toggle("is-hidden")
-            }
-
-            function nextLecture() {
-                const lecture_id = window.location.pathname.substring(9,)
-                fetch(`/api/lecture?id=${lecture_id}`)
-                    .then((resp) => resp.json())
-                    .then((response) => {
-                        let id = response["lecture_id"]
-                        window.location.href=`/lecture/${id}`
-                    })
             }
         </script>
         <script src="https://player.vimeo.com/api/player.js"></script>
@@ -87,6 +72,7 @@
                 </div>
                 <div class="class-player">
                     <iframe id="class-video" width="100%" height="100%" frameborder="0"
+                            src="{{ lecture.link }}"
                             allow="autoplay; fullscreen;" allowfullscreen></iframe>
                 </div>
             </div>

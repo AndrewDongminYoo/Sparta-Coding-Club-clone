@@ -70,7 +70,7 @@ function getDataForEnrollment(courseName) {
             third.textContent = discounted.toLocaleString() + " 원"
             document.querySelector(".installment-discount").textContent = (discount_ratio * 100).toFixed() + "% "
             document.querySelector(".installment-price span").textContent = installment.toLocaleString("ko", {maximumFractionDigits: 0})
-        }).catch((error)=>console.warn(error))
+        }).catch((error) => console.warn(error))
 }
 
 function enrollment() {
@@ -113,7 +113,7 @@ function lectureNav() {
                 let {title, seen, order, week, week_order} = klass
                 if (seen) seenIndex = order;
                 div.innerHTML += `
-                    <div class="week-detail">
+                    <div class="week-detail" onclick="goToThisLecture(order)">
                         <div class="">${week}-${week_order}</div>
                         <div class="text">${title}</div>
                         <i class="${seen ? "fas" : "far"} fa-check-circle"></i>
@@ -121,4 +121,35 @@ function lectureNav() {
             })
         })
         .catch((err) => console.warn(err))
+}
+
+
+function toggleModal() {
+    document.querySelector(".nav-modal").classList.toggle("is-hidden")
+}
+
+function nextLecture() {
+    const lecture_id = window.location.pathname.substring(9,)
+    fetch(`/api/lecture?id=${lecture_id}`)
+        .then((resp) => resp.json())
+        .then((response) => {
+            let id = response["lecture_id"]
+            window.location.href = `/lecture/${id}`
+        })
+}
+
+function goToThisLecture(order) {
+    const body = JSON.stringify({order, mode: "cors"})
+    const init = {method: "POST", body}
+    fetch("/api/lecture", init)
+        .then((resp) => resp.json())
+        .then((response) => {
+            if (response["message"] !== "success") {
+                alert(response.message)
+            } else {
+                let {lecture_id} = response
+                window.location.href = `/lecture/${lecture_id}`
+            }
+        })
+        .catch((err) => console.error(err))
 }
